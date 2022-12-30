@@ -30,7 +30,16 @@ export default function Home() {
           }}
         >
           <div className="col">
-            <input type="text" className="form-control" placeholder="id" ref={inputEl} />
+            <input
+              type="number"
+              min={1}
+              max={2100}
+              className="form-control"
+              placeholder="id"
+              ref={inputEl}
+              defaultValue={tokenId}
+              style={{ width: '6rem' }}
+            />
           </div>
           <div className="col">
             <button type="submit" className="btn btn-primary mb-3" formAction="/images">
