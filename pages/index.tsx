@@ -17,43 +17,78 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 style={{ paddingBottom: '5rem' }}>pNouns Unrevealed</h1>
+        <h1 style={{ paddingBottom: '2rem' }}>pNouns Unrevealed</h1>
 
-        <form
-          className="row g-3"
-          onSubmit={(e) => {
-            e.preventDefault()
-            const value = Number(inputEl.current?.value)
-            if (Number.isFinite(value)) {
-              setTokenId(value)
-            }
-          }}
-        >
-          <div className="col">
-            <input
-              type="number"
-              min={1}
-              max={2100}
-              className="form-control"
-              placeholder="id"
-              ref={inputEl}
-              defaultValue={tokenId}
-              style={{ width: '6rem' }}
-            />
-          </div>
-          <div className="col">
-            <button type="submit" className="btn btn-primary mb-3" formAction="/images">
-              Show
-            </button>
-          </div>
-          {Number.isFinite(tokenId) && (
-            <div className="col">
-              <a href={`/images/${tokenId}.svg`} target="_blank" rel="noreferrer">
-                <Image src={`/images/${tokenId}.svg`} alt={`${tokenId}.svg`} width={350} height={350} />
-              </a>
+        <div className="container">
+          <form
+            className="row "
+            onSubmit={(e) => {
+              e.preventDefault()
+              const value = Number(inputEl.current?.value)
+              if (Number.isFinite(value)) {
+                setTokenId(value)
+              }
+            }}
+          >
+            <div className="col-md-1"></div>
+            <div className="col-12 col-md-4">
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  min={1}
+                  max={2100}
+                  className="form-control"
+                  placeholder="id"
+                  ref={inputEl}
+                  defaultValue={tokenId}
+                />
+                <button className="btn btn-secondary" type="submit" id="button-addon2">
+                  Show
+                </button>
+              </div>
             </div>
-          )}
-        </form>
+            <div className="col-md-1"></div>
+            {/* <div className="col-3">
+              <input
+                type="number"
+                min={1}
+                max={2100}
+                className="form-control"
+                placeholder="id"
+                ref={inputEl}
+                defaultValue={tokenId}
+                style={{ width: '6rem' }}
+              />
+            </div>
+            <div className="col-3">
+              <button type="submit" className="btn btn-primary mb-3" formAction="/images">
+                Show
+              </button>
+            </div> */}
+            <div className="col-12 col-md-5 ml-3 mr-3">
+              {Number.isFinite(tokenId) && (
+                <a href={`/images/${tokenId}.svg`} target="_blank" rel="noreferrer">
+                  <Image src={`/images/${tokenId}.svg`} alt={`${tokenId}.svg`} width={350} height={350} />
+                </a>
+              )}{' '}
+            </div>
+            <div className="col-md-1"></div>
+            {/* <div className="input-group mb-3">
+              <input
+                type="number"
+                min={1}
+                max={2100}
+                className="form-control"
+                placeholder="id"
+                ref={inputEl}
+                defaultValue={tokenId}
+              />
+              <button className="btn btn-outline-secondary" type="submit">
+                Button
+              </button>
+            </div> */}
+          </form>
+        </div>
       </main>
     </>
   )
