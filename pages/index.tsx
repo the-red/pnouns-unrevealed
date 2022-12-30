@@ -48,23 +48,6 @@ export default function Home() {
               </div>
             </div>
             <div className="col-md-1"></div>
-            {/* <div className="col-3">
-              <input
-                type="number"
-                min={1}
-                max={2100}
-                className="form-control"
-                placeholder="id"
-                ref={inputEl}
-                defaultValue={tokenId}
-                style={{ width: '6rem' }}
-              />
-            </div>
-            <div className="col-3">
-              <button type="submit" className="btn btn-primary mb-3" formAction="/images">
-                Show
-              </button>
-            </div> */}
             <div className="col-12 col-md-5 ml-3 mr-3">
               {Number.isFinite(tokenId) && (
                 <a href={`/images/${tokenId}.svg`} target="_blank" rel="noreferrer">
@@ -73,20 +56,6 @@ export default function Home() {
               )}{' '}
             </div>
             <div className="col-md-1"></div>
-            {/* <div className="input-group mb-3">
-              <input
-                type="number"
-                min={1}
-                max={2100}
-                className="form-control"
-                placeholder="id"
-                ref={inputEl}
-                defaultValue={tokenId}
-              />
-              <button className="btn btn-outline-secondary" type="submit">
-                Button
-              </button>
-            </div> */}
           </form>
         </div>
       </main>
