@@ -27,9 +27,10 @@ export default function Home() {
       <main>
         <h1
           style={{
-            paddingTop: '2rem',
+            fontFamily: 'LondrinaSolid',
+            paddingTop: '1rem',
+            paddingLeft: '1rem',
             paddingBottom: '2rem',
-            textAlign: 'center',
           }}
         >
           pNouns Unrevealed
