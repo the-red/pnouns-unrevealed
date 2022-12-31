@@ -1,11 +1,21 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { generateSVGDocument } from './api/contract'
 
 export default function Home() {
   const [tokenId, setTokenId] = useState<number>(1)
+  const [svg, setSvg] = useState<string>()
   const inputEl = useRef<HTMLInputElement>(null)
+
+  const setSVGDocument = async (tokenId: number) => {
+    const svgXml = await generateSVGDocument(tokenId)
+    setSvg(Buffer.from(svgXml).toString('base64'))
+  }
+
+  useEffect(() => {
+    setSVGDocument(tokenId)
+  }, [])
 
   return (
     <>
@@ -26,6 +36,7 @@ export default function Home() {
               const value = Number(inputEl.current?.value)
               if (Number.isFinite(value)) {
                 setTokenId(value)
+                setSVGDocument(value)
               }
             }}
           >
@@ -49,9 +60,9 @@ export default function Home() {
             <div className="col-md-1 col-1"></div>
             <div className="col-md-6 col-12">
               {Number.isFinite(tokenId) && (
-                <a href={`/images/${tokenId}.svg`} target="_blank" rel="noreferrer">
+                <a href={`/api/images/${tokenId}`} target="_blank" rel="noreferrer">
                   <picture>
-                    <img src={`/images/${tokenId}.svg`} alt={`${tokenId}.svg`} />
+                    <img src={`data:image/svg+xml;base64,${svg}`} alt={`${tokenId}.svg`} />
                   </picture>
                 </a>
               )}
