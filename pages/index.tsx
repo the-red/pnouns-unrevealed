@@ -72,7 +72,7 @@ export default function Home() {
             <div className="col-md-1 col-1"></div>
             <div className="col-md-6 col-12">
               {Number.isFinite(tokenId) && (
-                <a href={`/images/${tokenId}.svg`} target="_blank" rel="noreferrer">
+                <a href={`/api/images/${tokenId}`} target="_blank" rel="noreferrer">
                   <picture>
                     <img src={`data:image/svg+xml;base64,${svg}`} alt={`${tokenId}.svg`} />
                   </picture>
