@@ -45,7 +45,7 @@ export default function Home() {
               <div className="input-group mb-3">
                 <input
                   type="number"
-                  min={1}
+                  min={0}
                   className="form-control"
                   placeholder="id"
                   ref={inputEl}
