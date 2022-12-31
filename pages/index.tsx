@@ -46,7 +46,6 @@ export default function Home() {
                 <input
                   type="number"
                   min={1}
-                  max={2100}
                   className="form-control"
                   placeholder="id"
                   ref={inputEl}
