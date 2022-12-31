@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { useRef, useState, useEffect } from 'react'
 import { generateSVGDocument } from './api/contract'
 
@@ -25,8 +24,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 style={{ paddingBottom: '2rem' }}>pNouns Unrevealed</h1>
+      <main>
+        <h1
+          style={{
+            paddingTop: '2rem',
+            paddingBottom: '2rem',
+            textAlign: 'center',
+          }}
+        >
+          pNouns Unrevealed
+        </h1>
 
         <div className="container">
           <form
@@ -40,8 +47,8 @@ export default function Home() {
               }
             }}
           >
-            <div className="col-md-1 col-1"></div>
-            <div className="col-md-3 col-10">
+            <div className="col-md-1 col-3"></div>
+            <div className="col-md-3 col-6">
               <div className="input-group mb-3">
                 <input
                   type="number"
@@ -56,7 +63,7 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="col-md-1 col-1"></div>
+            <div className="col-md-1 col-3"></div>
             <div className="col-md-6 col-12">
               {Number.isFinite(tokenId) && (
                 <a href={`/api/images/${tokenId}`} target="_blank" rel="noreferrer">
