@@ -4,7 +4,7 @@ import { generateSVGDocument } from './api/contract'
 
 const Ads = () => (
   <>
-    <a href="https://px.a8.net/svt/ejp?a8mat=3T4O7G+EF62LM+3OP8+HWPVL" rel="nofollow">
+    <a href="https://px.a8.net/svt/ejp?a8mat=3T4O7G+EF62LM+3OP8+HWPVL" rel="nofollow noopener" target="_blank">
       <picture>
         <img
           width="320"
