@@ -96,7 +96,7 @@ export default function Home() {
           </form>
         </div>
       </main>
-      <footer className="container text-center" style={{ paddingTop: '40px', paddingBottom: '20px' }}>
+      <footer className="container text-center" style={{ paddingTop: '60px', paddingBottom: '20px' }}>
         <Ads />
       </footer>
     </>
