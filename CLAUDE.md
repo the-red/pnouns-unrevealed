@@ -35,7 +35,6 @@ SVG はオンチェーンで生成される。`pages/api/contract.ts` の `gener
 注意点:
 
 - `pages/api/contract.ts` は `pages/api/` 配下にあるが default export を持たない共有モジュールで、API ルートとして機能するものではない。ブラウザでも動くコードである必要がある。
-- `public/images/*.svg` (2100 個) はコミット済みの静的 SVG だが、アプリのコードからは参照されていない。
 - スタイルは Bootstrap 5 の CSS (`_app.tsx` で import) とインライン style が中心。見出しフォント `LondrinaSolid` は `public/fonts/` に置かれ `styles/globals.css` で定義されている。
 
 ## コードスタイル
