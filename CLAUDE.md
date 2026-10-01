@@ -8,7 +8,7 @@ pNouns NFT のリビール前 SVG を、トークン ID を指定して表示す
 
 ## コマンド
 
-パッケージマネージャは yarn (v1、`yarn.lock`)。Node は `.node-version` の 18.12.1。
+パッケージマネージャは yarn (v1、`yarn.lock`)。Node は 24 系 (`.tool-versions` と `package.json` の `engines`)。Vercel は `engines` を見て Node バージョンを決める。
 
 ```sh
 yarn dev      # 開発サーバ (localhost:3000)
