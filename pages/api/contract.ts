@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 
 export const generateSVGDocument = async (tokenId: number) => {
-  const web3 = new Web3(`https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`)
+  const web3 = new Web3(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`)
   const tokenURIABI = [
     {
       inputs: [{ internalType: 'uint256', name: '_assetId', type: 'uint256' }],
