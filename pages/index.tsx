@@ -5,11 +5,18 @@ import { generateSVGDocument } from './api/contract'
 export default function Home() {
   const [tokenId, setTokenId] = useState<number>(0)
   const [svg, setSvg] = useState<string>()
+  // 初回表示時もすぐ取得を始めるので true で開始する
+  const [loading, setLoading] = useState(true)
   const inputEl = useRef<HTMLInputElement>(null)
 
   const setSVGDocument = async (tokenId: number) => {
-    const svgXml = await generateSVGDocument(tokenId)
-    setSvg(Buffer.from(svgXml).toString('base64'))
+    setLoading(true)
+    try {
+      const svgXml = await generateSVGDocument(tokenId)
+      setSvg(Buffer.from(svgXml).toString('base64'))
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -66,12 +73,24 @@ export default function Home() {
             </div>
             <div className="col-md-1 col-3"></div>
             <div className="col-md-6 col-12">
-              {Number.isFinite(tokenId) && (
-                <a href={`/api/images/${tokenId}`} target="_blank" rel="noreferrer">
-                  <picture>
-                    <img src={`data:image/svg+xml;base64,${svg}`} alt={`${tokenId}.svg`} />
-                  </picture>
-                </a>
+              {loading ? (
+                <div className="d-flex justify-content-center align-items-center" style={{ aspectRatio: '1 / 1' }}>
+                  <div
+                    className="spinner-border text-secondary"
+                    style={{ width: '3rem', height: '3rem' }}
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                svg && (
+                  <a href={`/api/images/${tokenId}`} target="_blank" rel="noreferrer">
+                    <picture>
+                      <img src={`data:image/svg+xml;base64,${svg}`} alt={`${tokenId}.svg`} />
+                    </picture>
+                  </a>
+                )
               )}
             </div>
             <div className="col-md-1"></div>
