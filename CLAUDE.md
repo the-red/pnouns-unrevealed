@@ -29,7 +29,7 @@ SVG はオンチェーンで生成される。`pages/api/contract.ts` の `gener
 
 この関数は 2 か所から使われる:
 
-- `pages/index.tsx` — **クライアント側で直接 import** して呼び出し、結果を base64 の data URI にして `<img>` に表示する。API ルートは経由しない。
+- `pages/[[...id]].tsx` — トップページ。`/` で 0 番、`/123` で 123 番を表示し (ID は `getServerSideProps` で検証、不正なパスは 404)、Show ボタンは `router.push` でパスを切り替える。SVG は **クライアント側で直接 import** して呼び出し、結果を base64 の data URI にして `<img>` に表示する。API ルートは経由しない。
 - `pages/api/images/[tokenId].ts` — 同じ関数をサーバ側で呼び、`image/svg+xml` として返す。トップページの画像をクリックしたときの別タブ表示先。
 
 注意点:

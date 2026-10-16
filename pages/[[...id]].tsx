@@ -1,27 +1,43 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import type { GetServerSideProps } from 'next'
 import { useRef, useState, useEffect } from 'react'
 import { generateSVGDocument } from './api/contract'
 
-export default function Home() {
-  const [tokenId, setTokenId] = useState<number>(0)
+type Props = {
+  tokenId: number
+}
+
+// `/` は 0 番、`/123` は 123 番。それ以外のパスは 404
+export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
+  const segments = (params?.id as string[] | undefined) ?? []
+  if (segments.length === 0) return { props: { tokenId: 0 } }
+  if (segments.length === 1 && /^\d+$/.test(segments[0])) return { props: { tokenId: Number(segments[0]) } }
+  return { notFound: true }
+}
+
+export default function Home({ tokenId }: Props) {
+  const router = useRouter()
   const [svg, setSvg] = useState<string>()
   // 初回表示時もすぐ取得を始めるので true で開始する
   const [loading, setLoading] = useState(true)
   const inputEl = useRef<HTMLInputElement>(null)
 
-  const setSVGDocument = async (tokenId: number) => {
-    setLoading(true)
-    try {
-      const svgXml = await generateSVGDocument(tokenId)
-      setSvg(Buffer.from(svgXml).toString('base64'))
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    setSVGDocument(tokenId)
-  }, [])
+    // 連続で ID を切り替えたとき、古いリクエストの結果で上書きしないようにする
+    let cancelled = false
+    setLoading(true)
+    generateSVGDocument(tokenId)
+      .then((svgXml) => {
+        if (!cancelled) setSvg(Buffer.from(svgXml).toString('base64'))
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [tokenId])
 
   return (
     <>
@@ -49,9 +65,8 @@ export default function Home() {
             onSubmit={(e) => {
               e.preventDefault()
               const value = Number(inputEl.current?.value)
-              if (Number.isFinite(value)) {
-                setTokenId(value)
-                setSVGDocument(value)
+              if (Number.isInteger(value) && value >= 0) {
+                router.push(`/${value}`)
               }
             }}
           >
@@ -64,6 +79,8 @@ export default function Home() {
                   className="form-control"
                   placeholder="id"
                   ref={inputEl}
+                  // ブラウザの戻る・進むで ID が変わったときに入力欄も追従させる
+                  key={tokenId}
                   defaultValue={tokenId}
                 />
                 <button className="btn btn-secondary" type="submit" id="button-addon2">
